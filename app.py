@@ -15,5 +15,8 @@ def transactions():
 
 @app.get("/report")
 def report():
-	with open('./data/result.json') as file:
-		return load(file)
+	try:
+		with open('./data/result.json') as file:
+			return load(file)
+	except Exception as e:
+		return "Missing results file, have you uploaded your transactions?", 406
