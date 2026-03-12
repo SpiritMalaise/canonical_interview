@@ -8,8 +8,8 @@ def health_check():
 
 @app.post("/transactions")
 def transactions():
-	return 501
+	return "Not Yet Implemented", 501
 
-@app.post("/report")
-def transactions():
-	return 501
+@app.get("/report")
+def report():
+	return "Not Yet Implemented", 501
