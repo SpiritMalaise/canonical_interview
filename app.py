@@ -1,6 +1,9 @@
-from flask import Flask
+from flask import Flask, request
+from src import FileProcessor
 
 app = Flask(__name__)
+
+data_store = {}
 
 @app.route("/health")
 def health_check():
@@ -8,7 +11,7 @@ def health_check():
 
 @app.post("/transactions")
 def transactions():
-	return "Not Yet Implemented", 501
+	return FileProcessor.processFiles(request.files)
 
 @app.get("/report")
 def report():
