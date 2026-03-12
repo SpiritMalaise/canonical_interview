@@ -1,10 +1,9 @@
 from __future__ import annotations
 from json import dump
-import csv
 
-def processFile(file: FileStorage):
-	fieldnames = ['Date', 'Type', 'Amount($)', 'Memo']
+from werkzeug.datastructures.file_storage import FileStorage
 
+def processFile(file: FileStorage) -> tuple[str, int]:
 	revenue = 0
 	expenses = 0
 
@@ -29,6 +28,6 @@ def processFile(file: FileStorage):
 		"net-revenue": round(revenue - expenses,2)
 	}
 	
-	with open('./data/result.json', 'w+') as file:
-		dump(result, file)
+	with open('./data/result.json', 'w+') as output:
+		dump(result, output)
 	return 'OK', 200

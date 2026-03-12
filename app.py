@@ -1,9 +1,9 @@
 from flask import Flask, request
+from json import load
+
 from src import FileProcessor
 
 app = Flask(__name__)
-
-data_store = {}
 
 @app.route("/health")
 def health_check():
@@ -11,8 +11,9 @@ def health_check():
 
 @app.post("/transactions")
 def transactions():
-	return FileProcessor.processFiles(request.files)
+	return FileProcessor.processFile(request.files['data'])
 
 @app.get("/report")
 def report():
-	return "Not Yet Implemented", 501
+	with open('./data/result.json') as file:
+		return load(file)
